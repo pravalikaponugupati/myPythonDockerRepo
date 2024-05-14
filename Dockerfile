@@ -9,6 +9,7 @@ RUN apk --no-cache add curl
 
 # install Python modules needed by the Python app
 COPY requirements.txt /usr/src/app/
+RUN ls -la
 RUN pip install --no-cache-dir /usr/src/app/requirements.txt/
 #RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
