@@ -16,39 +16,7 @@ admin_enabled            = true
 # Remove the "georeplication_locations" attribute
 }
 
-resource "azurerm_app_service_plan" "acr-plan" {
-name                = "acrappserviceplan"
-location            = azurerm_resource_group.acr-rg.location
-resource_group_name = azurerm_resource_group.acr-rg.name
-sku {
-tier = "Free"
-size = "F1"
-}
-}
 
-data "azurerm_container_registry" "acr" {
-  name                = "acrcontainer"
-  resource_group_name = "acrresourcegroup"
-}
-
-resource "azurerm_app_service" "acr-app" {
-  name                = "acrwebapp"
-  location            = azurerm_resource_group.acr-rg.location
-  resource_group_name = azurerm_resource_group.acr-rg.name
-  app_service_plan_id = azurerm_app_service_plan.acr-plan.id
-
-  site_config {
-    always_on        = true
-    linux_fx_version = "DOCKER|${data.azurerm_container_registry.acr.name}.azurecr.io/DOCKER_IMAGE_NAME:DOCKER_IMAGE_TAG"
-  }
-
-  app_settings = {
-    "WEBSITE_HTTPLOGGING_RETENTION_DAYS" = "7"
-    "DOCKER_REGISTRY_SERVER_URL"         = "https://${data.azurerm_container_registry.acr.login_server}"
-    "DOCKER_REGISTRY_SERVER_USERNAME"    = "${data.azurerm_container_registry.acr.admin_username}"
-    #"DOCKER_REGISTRY_SERVER_PASSWORD"    = "${data.azurerm_key_vault_secret.acr_password.value}"
-  }
-}
 
 # resource "azurerm_app_service" "acr-app" {
 # name                = "acrwebapp"
