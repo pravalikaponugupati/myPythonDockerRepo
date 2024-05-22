@@ -35,7 +35,6 @@ output "key_vault_id" {
   value = data.azurerm_key_vault.acr-vault.id
 }
 
-
 resource "azurerm_app_service" "acr-app" {
   name                = "acr-web-app"
   location            = azurerm_resource_group.acr-rg.location
