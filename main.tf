@@ -31,11 +31,6 @@ data "azurerm_container_registry" "acr" {
   resource_group_name = "acrresourcegroup"
 }
 
-data "azurerm_key_vault_secret" "acr_password" {
-  name         = "acrPassword"
-  key_vault_id = data.azurerm_key_vault.example.id
-}
-
 resource "azurerm_app_service" "acr-app" {
   name                = "acrwebapp"
   location            = azurerm_resource_group.acr-rg.location
@@ -51,7 +46,7 @@ resource "azurerm_app_service" "acr-app" {
     "WEBSITE_HTTPLOGGING_RETENTION_DAYS" = "7"
     "DOCKER_REGISTRY_SERVER_URL"         = "https://${data.azurerm_container_registry.acr.login_server}"
     "DOCKER_REGISTRY_SERVER_USERNAME"    = "${data.azurerm_container_registry.acr.admin_username}"
-    "DOCKER_REGISTRY_SERVER_PASSWORD"    = "${data.azurerm_key_vault_secret.acr_password.value}"
+    #"DOCKER_REGISTRY_SERVER_PASSWORD"    = "${data.azurerm_key_vault_secret.acr_password.value}"
   }
 }
 
