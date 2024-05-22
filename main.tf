@@ -3,12 +3,12 @@ features {}
 }
 
 resource "azurerm_resource_group" "acr-rg" {
-name     = "acr-resource-group"
+name     = "acrresourcegroup"
 location = "West US"
 }
 
 resource "azurerm_container_registry" "azurerm_container_registry" {
-name                     = "acr-container"
+name                     = "acrcontainer"
 resource_group_name      = azurerm_resource_group.acr-rg.name
 location                 = azurerm_resource_group.acr-rg.location
 sku                      = "Basic"
@@ -17,7 +17,7 @@ admin_enabled            = true
 }
 
 resource "azurerm_app_service_plan" "acr-plan" {
-name                = "acr-app-service-plan"
+name                = "acrappserviceplan"
 location            = azurerm_resource_group.acr-rg.location
 resource_group_name = azurerm_resource_group.acr-rg.name
 sku {
@@ -27,8 +27,8 @@ size = "F1"
 }
 
 data "azurerm_container_registry" "acr" {
-  name                = "your_acr_name"
-  resource_group_name = "your_acr_resource_group_name"
+  name                = "acrcontainer"
+  resource_group_name = "acrresourcegroup"
 }
 
 data "azurerm_key_vault_secret" "acr_password" {
@@ -37,7 +37,7 @@ data "azurerm_key_vault_secret" "acr_password" {
 }
 
 resource "azurerm_app_service" "acr-app" {
-  name                = "acr-web-app"
+  name                = "acrwebapp"
   location            = azurerm_resource_group.acr-rg.location
   resource_group_name = azurerm_resource_group.acr-rg.name
   app_service_plan_id = azurerm_app_service_plan.acr-plan.id
@@ -56,7 +56,7 @@ resource "azurerm_app_service" "acr-app" {
 }
 
 # resource "azurerm_app_service" "acr-app" {
-# name                = "acr-web-app"
+# name                = "acrwebapp"
 # location            = azurerm_resource_group.acr-rg.location
 # resource_group_name = azurerm_resource_group.acr-rg.name
 # app_service_plan_id = azurerm_app_service_plan.acr-rg.id
