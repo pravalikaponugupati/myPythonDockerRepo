@@ -53,8 +53,6 @@ resource "azurerm_app_service" "acr-app" {
         "DOCKER_REGISTRY_SERVER_USERNAME"    = "${data.azurerm_container_registry.acr.admin_username}"
         "DOCKER_REGISTRY_SERVER_PASSWORD"    = "${data.azurerm_key_vault_secret.acr_password.value}"
     }
-
-
 }
     
   
