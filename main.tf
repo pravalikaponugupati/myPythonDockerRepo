@@ -41,7 +41,7 @@ resource "azurerm_app_service" "acr-app" {
   location            = azurerm_resource_group.acr-rg.location
   resource_group_name = azurerm_resource_group.acr-rg.name
   app_service_plan_id = azurerm_app_service_plan.acr-plan.id
-
+}
   site_config {
     always_on        = true
     linux_fx_version = "DOCKER|${data.azurerm_container_registry.acr.name}.azurecr.io/DOCKER_IMAGE_NAME:DOCKER_IMAGE_TAG"
