@@ -3,7 +3,7 @@ features {}
 }
 
 resource "azurerm_resource_group" "acr-rg" {
-name     = "acrresourcegroup"
+name     = "acrresourcegroup1"
 location = "West US"
 }
 
