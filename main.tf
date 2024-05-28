@@ -16,7 +16,7 @@ admin_enabled            = true
 # Remove the "georeplication_locations" attribute
 }
 
-resource "azurerm_app_service_plan" "acr-plan" {
+#resource "azurerm_app_service_plan" "acr-plan" {
 #     name                = "acrplan"
 #     location            = azurerm_resource_group.acr-rg.location
 #     resource_group_name = azurerm_resource_group.acr-rg.name
