@@ -8,7 +8,7 @@ location = "West US"
 }
 
 resource "azurerm_container_registry" "azurerm_registry" {
-name                     = "acrcontainer2205"
+name                     = "acrcontainer2905"
 resource_group_name      = azurerm_resource_group.acr-rg.name
 location                 = azurerm_resource_group.acr-rg.location
 sku                      = "Basic"
